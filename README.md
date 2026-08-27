@@ -9,5 +9,5 @@ It ain't much, but it's a surprise tool that will help us later.
 # pip install numpy opencv-python yt-dlp
 
 # Bad Apple!!
-curl https://raw.githubusercontent.com/SinsuSquid/BadApple-VSCode/refs/heads/main/play_bad_apple.py | python3
+curl https://raw.githubusercontent.com/SinsuSquid/BadApple-ASCII/refs/heads/main/play_bad_apple.py | python3
 ```
