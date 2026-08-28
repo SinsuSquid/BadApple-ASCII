@@ -10,7 +10,7 @@ ASCII_CHARS = np.array(list(" .:-=+*#%@"))
 
 def get_stream_url(youtube_url="https://www.youtube.com/watch?v=FtutLA63Cp8"):
     ydl_opts = {
-        'format': 'best[height<=360]/bestvideo[height<=360]',
+        'format': 'bestvideo[height<=360][vcodec^=avc1]/best[height<=360][vcodec^=avc1]',
         'quiet': True,
         'nocheckcertificate': True
     }
