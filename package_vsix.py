@@ -1,11 +1,19 @@
 import os
 import zipfile
 import json
+import xml.etree.ElementTree as ET
+from xml.sax.saxutils import escape
 
 with open('package.json', 'r', encoding='utf-8') as f:
     pkg = json.load(f)
 
 vsix_name = f"{pkg['name']}-{pkg['version']}.vsix"
+
+name_esc = escape(str(pkg.get('name', '')))
+version_esc = escape(str(pkg.get('version', '1.0.0')))
+publisher_esc = escape(str(pkg.get('publisher', '')))
+display_name_esc = escape(str(pkg.get('displayName', '')))
+desc_esc = escape(str(pkg.get('description', '')))
 
 content_types_xml = '''<?xml version="1.0" encoding="utf-8"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
@@ -22,11 +30,11 @@ content_types_xml = '''<?xml version="1.0" encoding="utf-8"?>
 vsix_manifest_xml = f'''<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Language="en-US" Id="{pkg['name']}" Version="{pkg['version']}" Publisher="{pkg['publisher']}"/>
-    <DisplayName>{pkg['displayName']}</DisplayName>
-    <Description xml:space="preserve">{pkg['description']}</Description>
+    <Identity Language="en-US" Id="{name_esc}" Version="{version_esc}" Publisher="{publisher_esc}"/>
+    <DisplayName>{display_name_esc}</DisplayName>
+    <Description xml:space="preserve">{desc_esc}</Description>
     <Tags>bad apple,ascii,touhou,retro,crt,terminal</Tags>
-    <Categories>Other,Themes,Visualization</Categories>
+    <Categories>Other,Visualization</Categories>
     <Icon>extension/media/icon.png</Icon>
   </Metadata>
   <Installation>
@@ -39,6 +47,11 @@ vsix_manifest_xml = f'''<?xml version="1.0" encoding="utf-8"?>
     <Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/media/icon.png" Addressable="true"/>
   </Assets>
 </PackageManifest>'''
+
+# Validate XML strictly before writing
+ET.fromstring(content_types_xml)
+ET.fromstring(vsix_manifest_xml)
+print("XML validation passed with zero errors!")
 
 with zipfile.ZipFile(vsix_name, 'w', zipfile.ZIP_DEFLATED) as z:
     z.writestr('[Content_Types].xml', content_types_xml)
@@ -60,4 +73,4 @@ with zipfile.ZipFile(vsix_name, 'w', zipfile.ZIP_DEFLATED) as z:
             z.write(f, f'extension/{f}')
             print(f'Packed: extension/{f}')
 
-print(f'VSIX created: {vsix_name}')
+print(f'VSIX successfully generated and validated: {vsix_name}')
