@@ -19,6 +19,11 @@
 
 ---
 
+## Preview
+![Bad Apple!!](preview.png)
+
+---
+
 ## ✨ Features
 
 - **📱 Dedicated Sidebar View**: Lives conveniently in your VS Code Activity Bar sidebar so you can code while Bad Apple plays smoothly alongside your editor.
