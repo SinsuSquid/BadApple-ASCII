@@ -1,0 +1,12 @@
+# Build artifacts
+*.vsix
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code & OS
+.vscode/
+.DS_Store
+Thumbs.db
