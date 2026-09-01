@@ -1,9 +1,11 @@
 {
-  "name": "badapple-ascii",
-  "displayName": "Bad Apple!! ASCII Player",
+  "name": "badapple-ascii-player",
+  "displayName": "Bad Apple!! ASCII in VSCode ",
   "description": "Watch Bad Apple!! in real-time Black & White ASCII art inside your VS Code Sidebar or Editor tab.",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "publisher": "SinsuSquid",
+  "private": false,
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/SinsuSquid/BadApple-ASCII"
