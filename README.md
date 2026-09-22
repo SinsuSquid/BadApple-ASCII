@@ -20,7 +20,7 @@
 ---
 
 ## Preview
-![Bad Apple!!](preview.png)
+![Bad Apple!!](media/preview.gif)
 
 ---
 
